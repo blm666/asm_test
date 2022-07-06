@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+source ~/.bash_profile
+if [ ! "$?" == "0" ]; then
+    echo "source failed!"
+    exit 1
+fi
+#这样在非交互模式下的shell脚本也能使用alias下的命令了
+shopt -s expand_aliases
+if [ ! "$?" == "0" ]; then
+    echo "shopt failed!"
+    exit 1
+fi
+
+ME_DIR=$(cd `dirname $0`&&pwd)
+
+#######TEMPLATE END#######
+fas64 -o hello.o hello.S &&
+fld64 -s -o hello hello.o &&
+run_exe_android hello
